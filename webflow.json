@@ -1,6 +1,7 @@
 {
   "cloud": {
-    "framework": "nextjs"
+    "framework": "nextjs",
+    "appDir": "./src/app"
   },
   "devlink": {
     "rootDir": "./src/devlink",
