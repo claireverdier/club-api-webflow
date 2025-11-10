@@ -1,5 +1,5 @@
 {
-  "framework": "custom",
-  "root": ".",
-  "output": "out"
+  "cloud": {
+    "framework": "custom"
+  }
 }
