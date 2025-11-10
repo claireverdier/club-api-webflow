@@ -1,0 +1,7 @@
+{
+  "name": "clubs-api-webflow",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node api/clubs.js"
+  }
+}
