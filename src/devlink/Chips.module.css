@@ -1,0 +1,45 @@
+.chips {
+  display: flex;
+  padding: var(--spacing--1-5) var(--spacing--3);
+  justify-content: center;
+  align-items: center;
+
+  border-radius: var(--spacing--10);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.chips.bg-background-g {
+  height: var(--spacing--8);
+  border: 1px solid var(--background--background-gamma);
+  transition: all 300ms ease;
+}
+
+.chips.bg-background-g:hover {
+  border: 1px solid var(--fontcolor--light);
+}
+
+.bg-background-g {
+  background-color: var(--background--background-gamma);
+}
+
+.chips.bg-background-g.show-more-button {
+  width: var(--spacing--8);
+  height: var(--spacing--8);
+  padding-right: 6px;
+  padding-left: 6px;
+
+  font-family: Keepcool;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.bg-light {
+  background-color: var(--fontcolor--light);
+}
+
+.text-background-b {
+  color: var(--background--background-beta);
+}

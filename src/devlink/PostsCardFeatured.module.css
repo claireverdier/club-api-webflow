@@ -1,0 +1,173 @@
+.post-card {
+  overflow: hidden;
+  border-radius: var(--spacing--10);
+  background-color: var(--background--background-gamma);
+}
+
+.post-card:hover {
+  text-decoration: none;
+}
+
+.post-card-cover {
+  width: 100%;
+  height: 230px;
+}
+
+.post-card-cover.is-featured {
+  height: 270px;
+  aspect-ratio: auto;
+}
+
+@media screen and (min-width: 1440px) {
+  .post-card-cover.is-featured {
+    height: 420px;
+  }
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.post-card-cover.overflow-clip {
+  overflow: clip;
+}
+
+._w-full {
+  width: 100%;
+}
+
+._w-full.overflow-hidden.faq-answer.max-w-640 {
+  max-width: 640px;
+}
+
+@media screen and (min-width: 1440px) {
+  ._w-full.overflow-hidden.faq-answer.max-w-640 {
+    max-width: 640px;
+  }
+}
+
+.img-ratio-3-2 {
+  aspect-ratio: 3/2;
+}
+
+.corner-radius-10 {
+  border-radius: var(--spacing--10);
+}
+
+.img-drop-shadow {
+  filter: drop-shadow(0px 20px 160px #FFFFFF80);
+}
+
+@media screen and (max-width: 991px) {
+  .r-md-order-first {
+    order: -999;
+  }
+}
+
+.img-drop-shadow-primary {
+  box-shadow: 0 20px 240px 80px rgba(102, 204, 153, 0.24);
+}
+
+@media screen and (max-width: 991px) {
+  ._w-full.img-drop-shadow {
+    filter: none;
+  }
+}
+
+.d-none {
+  display: none;
+}
+
+@media screen and (max-width: 479px) {
+  .d-none {
+    display: none;
+  }
+}
+
+.h-full {
+  height: 100%;
+}
+
+.post-card-info {
+  display: flex;
+  margin-top: auto;
+  padding: var(--spacing--6);
+  flex-direction: column;
+  flex-wrap: nowrap;
+  grid-column-gap: var(--spacing--1);
+  grid-row-gap: var(--spacing--1);
+}
+
+.text-body-2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  letter-spacing: 0em;
+}
+
+.text-medium {
+  color: var(--fontcolor--medium);
+}
+
+.text-wrap-bal {
+  text-wrap: balance;
+}
+
+@media screen and (max-width: 991px) {
+  .md-w-full {
+    width: 100%;
+  }
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.text-ali-cen {
+  text-align: center;
+}
+
+.text-body-2.js-pricing-item.is-yearly {
+  display: none;
+}
+
+.text-h5 {
+  font-family: 'Plus Jakarta Sans';
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: 0em;
+}
+
+.text-primary-g {
+  color: var(--primary--primary-gamma);
+}
+
+.mb-1 {
+  margin-bottom: var(--spacing--1);
+}
+
+.text-h5.text-primary-g.text-ali-cen {
+  display: block;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-h5.nav-links {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+@media screen and (min-width: 1440px) {
+  .text-h5.nav-links {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.text-ali-r {
+  text-align: right;
+}

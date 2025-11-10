@@ -1,0 +1,125 @@
+.d-flex-gap-6 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  grid-column-gap: var(--spacing--6);
+  grid-row-gap: var(--spacing--6);
+}
+
+@media screen and (max-width: 479px) {
+  .d-flex-gap-6.r-dir-col_ali-l {
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+}
+
+.bg-ilu-kp {
+  width: var(--spacing--15);
+  padding: 10px;
+  border-radius: 100%;
+  background-color: hsla(216, 30.30%, 12.94%, 0.24);
+  opacity: 1;
+}
+
+.d-flex-dir-col_gap-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  grid-column-gap: var(--spacing--1);
+  grid-row-gap: var(--spacing--1);
+}
+
+.d-flex-dir-col_gap-1:hover {
+  text-decoration: none;
+}
+
+.p-6 {
+  padding: var(--spacing--6);
+}
+
+._w-full {
+  width: 100%;
+}
+
+@media screen and (max-width: 991px) {
+  .md-d-none {
+    display: none;
+  }
+}
+
+.text-h5 {
+  font-family: 'Plus Jakarta Sans';
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  letter-spacing: 0em;
+}
+
+.text-primary-g {
+  color: var(--primary--primary-gamma);
+}
+
+.mb-1 {
+  margin-bottom: var(--spacing--1);
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.text-h5.text-primary-g.text-ali-cen {
+  display: block;
+}
+
+.text-ali-cen {
+  text-align: center;
+}
+
+.text-medium {
+  color: var(--fontcolor--medium);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-h5.nav-links {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+@media screen and (min-width: 1440px) {
+  .text-h5.nav-links {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.text-ali-r {
+  text-align: right;
+}
+
+.text-body-2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  letter-spacing: 0em;
+}
+
+.text-wrap-bal {
+  text-wrap: balance;
+}
+
+@media screen and (max-width: 991px) {
+  .md-w-full {
+    width: 100%;
+  }
+}
+
+.text-body-2.js-pricing-item.is-yearly {
+  display: none;
+}

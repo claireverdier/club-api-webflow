@@ -1,0 +1,124 @@
+.card-coach {
+  position: relative;
+
+  display: flex;
+  overflow: hidden;
+  height: 288px;
+  padding: var(--spacing--6);
+
+  border-radius: var(--spacing--10);
+
+  background-image: linear-gradient(180deg, hsla(214.28571428571428, 35.00%, 7.84%, 0.00), hsla(214.28571428571428, 35.00%, 7.84%, 0.80));
+
+  object-fit: fill;
+}
+
+@media screen and (min-width: 1440px) {
+  .card-coach {
+    height: 416px;
+  }
+}
+
+.d-flex-dir-col_gap-0 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.pt-3 {
+  margin-top: var(--spacing--3);
+}
+
+.p-6 {
+  padding: var(--spacing--6);
+}
+
+._w-full {
+  width: 100%;
+}
+
+.d-flex-dir-col_gap-0.p-6._w-full.h-full {
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.py-4 {
+  padding-top: var(--spacing--4);
+  padding-bottom: var(--spacing--4);
+}
+
+.border-bot {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+.border-background-g {
+  border-color: var(--background--background-gamma);
+}
+
+.text-h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 800;
+  letter-spacing: 0em;
+  text-transform: uppercase;
+}
+
+.text-h6 {
+  display: block;
+
+  font-family: 'Plus Jakarta Sans';
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0em;
+}
+
+.text-medium {
+  color: var(--fontcolor--medium);
+}
+
+.text-h6.text-medium.mr-16 {
+  margin-right: var(--spacing--16);
+}
+
+@media screen and (max-width: 479px) {
+  .text-h6.text-medium.mr-16.r-xs-mr-auto {
+    margin-right: auto;
+  }
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.text-light {
+  color: var(--fontcolor--light);
+}
+
+.image {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: -1;
+
+  width: 100%;
+  height: 100%;
+}
+
+.image.card-coach-img {
+  z-index: -2;
+}

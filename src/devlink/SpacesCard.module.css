@@ -1,0 +1,80 @@
+.space-card {
+  overflow: hidden;
+  border-radius: var(--spacing--10);
+  background-color: var(--background--background-gamma);
+}
+
+.space-card:hover {
+  text-decoration: none;
+}
+
+.space-card-cover {
+  width: 100%;
+  height: 230px;
+}
+
+.post-card-info-copy {
+  display: flex;
+  margin-top: auto;
+  padding: var(--spacing--6);
+  flex-direction: column;
+  flex-wrap: nowrap;
+  grid-column-gap: var(--spacing--4);
+  grid-row-gap: var(--spacing--4);
+}
+
+.text-h4 {
+  font-family: 'Plus Jakarta Sans';
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 800;
+  letter-spacing: 0em;
+  text-transform: uppercase;
+
+  display: inline-block;
+}
+
+@media screen and (max-width: 991px) {
+  .text-h4 {
+    text-align: left;
+  }
+}
+
+.md-text-center {
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media screen and (max-width: 991px) {
+  .md-text-center {
+    text-align: center;
+  }
+}
+
+._w-full {
+  width: 100%;
+}
+
+.text-primary-g {
+  color: var(--primary--primary-gamma);
+}
+
+.text-medium {
+  color: var(--fontcolor--medium);
+}
+
+.d-none {
+  display: none;
+}
+
+@media screen and (max-width: 479px) {
+  .d-none {
+    display: none;
+  }
+}
+
+.text-upper {
+  text-transform: uppercase;
+}

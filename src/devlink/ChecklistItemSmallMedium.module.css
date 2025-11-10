@@ -1,0 +1,119 @@
+.d-flex-gap-4 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  grid-column-gap: var(--spacing--4);
+  grid-row-gap: var(--spacing--4);
+}
+
+@media screen and (min-width: 1440px) {
+  .d-flex-gap-4.ml-auto {
+    margin-left: 0px;
+  }
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.d-flex-gap-4.ml-auto.position-relative {
+  right: -7px;
+}
+
+.position-relative {
+  position: relative;
+}
+
+@media screen and (max-width: 991px) {
+  .md-w-full {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .d-flex-gap-4.r-sm-d-none {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .d-flex-gap-4.r-sm-d-none.ml-auto.position-relative {
+    right: 0px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .d-flex-gap-4.r-ali-cen {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .d-flex-gap-4.r-md-dir-col {
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .r-md-dir-col {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+}
+
+.opacity-24 {
+  opacity: 0.24;
+}
+
+.bullet-point-check-dark {
+  display: flex;
+  width: var(--spacing--6);
+  height: var(--spacing--6);
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100%;
+
+  background-color: var(--background--background-gamma);
+
+  font-family: Keepcool;
+  color: var(--fontcolor--light);
+  font-size: 20px;
+}
+
+.text-h6 {
+  display: block;
+
+  font-family: 'Plus Jakarta Sans';
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0em;
+}
+
+.text-medium {
+  color: var(--fontcolor--medium);
+}
+
+.text-h6.text-medium.mr-16 {
+  margin-right: var(--spacing--16);
+}
+
+@media screen and (max-width: 479px) {
+  .text-h6.text-medium.mr-16.r-xs-mr-auto {
+    margin-right: auto;
+  }
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+.text-light {
+  color: var(--fontcolor--light);
+}

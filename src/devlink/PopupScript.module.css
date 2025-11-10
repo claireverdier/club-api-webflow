@@ -1,0 +1,15 @@
+.d-none {
+  display: none;
+}
+
+@media screen and (max-width: 479px) {
+  .d-none {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .md-d-block {
+    display: block;
+  }
+}
