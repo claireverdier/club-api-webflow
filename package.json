@@ -1,7 +1,10 @@
 {
-  "name": "clubs-api-webflow",
+  "name": "clubs-api",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
+    "build": "echo 'Nothing to build'",
     "start": "node api/clubs.js"
-  }
+  },
+  "dependencies": {}
 }
