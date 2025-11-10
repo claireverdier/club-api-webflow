@@ -1,5 +1,10 @@
 {
   "cloud": {
-    "framework": "custom"
+    "framework": "nextjs"
+  },
+  "devlink": {
+    "rootDir": "./src/devlink",
+    "cssModules": true
   }
 }
+
