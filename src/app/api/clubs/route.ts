@@ -12,11 +12,13 @@ interface WebflowCollection {
 
 interface WebflowItem {
   id: string;
-  name: string;
-  slug?: string;
-  latitude?: number;
-  longitude?: number;
-  [key: string]: any;
+  fieldData: {
+    name?: string;
+    slug?: string;
+    latitude?: string;
+    longitude?: string;
+    [key: string]: any;
+  };
 }
 
 export async function GET() {
@@ -65,12 +67,12 @@ export async function GET() {
     const itemsData = (await itemsRes.json()) as { items: WebflowItem[] };
     const items = itemsData.items ?? [];
 
-    // 4️⃣ Ne garde que les champs utiles
+    // 4️⃣ Ne garde que les champs utiles, depuis `fieldData`
     const filtered = items.map((item) => ({
-      name: item.name,
-      slug: item.slug,
-      lat: item.latitude ?? item.lat ?? null,
-      lng: item.longitude ?? item.lng ?? null,
+      name: item.fieldData?.name ?? null,
+      slug: item.fieldData?.slug ?? null,
+      lat: parseFloat(item.fieldData?.latitude ?? "0"),
+      lng: parseFloat(item.fieldData?.longitude ?? "0"),
     }));
 
     return NextResponse.json(filtered);
