@@ -4,6 +4,18 @@ const WEBFLOW_API_URL = "https://api.webflow.com/v2";
 const WEBFLOW_SITE_ID = process.env.WEBFLOW_SITE_ID!;
 const WEBFLOW_TOKEN = process.env.WEBFLOW_API_TOKEN!;
 
+interface WebflowCollection {
+  id: string;
+  displayName: string;
+  slug: string;
+}
+
+interface WebflowItem {
+  id: string;
+  name: string;
+  [key: string]: any;
+}
+
 export async function GET() {
   try {
     // 1️⃣ Récupère la liste des collections du site
@@ -14,7 +26,7 @@ export async function GET() {
       },
     });
 
-    const collections = await collectionsRes.json();
+    const collections: WebflowCollection[] = await collectionsRes.json();
 
     // 2️⃣ Trouve la collection "Clubs" (par son slug ou nom)
     const clubsCollection = collections.find(
@@ -33,7 +45,7 @@ export async function GET() {
       },
     });
 
-    const { items } = await itemsRes.json();
+    const { items }: { items: WebflowItem[] } = await itemsRes.json();
 
     // 4️⃣ Renvoie le JSON à Postman
     return NextResponse.json(items);
