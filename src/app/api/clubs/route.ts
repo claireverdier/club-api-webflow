@@ -13,6 +13,9 @@ interface WebflowCollection {
 interface WebflowItem {
   id: string;
   name: string;
+  slug?: string;
+  latitude?: number;
+  longitude?: number;
   [key: string]: any;
 }
 
@@ -32,13 +35,6 @@ export async function GET() {
 
     const data = (await collectionsRes.json()) as { collections: WebflowCollection[] };
     const collections = data.collections ?? [];
-
-    if (!Array.isArray(collections) || collections.length === 0) {
-      return NextResponse.json(
-        { error: "Aucune collection trouvée pour ce site Webflow" },
-        { status: 404 }
-      );
-    }
 
     // 2️⃣ Trouve la collection "Clubs"
     const clubsCollection = collections.find(
@@ -69,7 +65,15 @@ export async function GET() {
     const itemsData = (await itemsRes.json()) as { items: WebflowItem[] };
     const items = itemsData.items ?? [];
 
-    return NextResponse.json(items);
+    // 4️⃣ Ne garde que les champs utiles
+    const filtered = items.map((item) => ({
+      name: item.name,
+      slug: item.slug,
+      lat: item.latitude ?? item.lat ?? null,
+      lng: item.longitude ?? item.lng ?? null,
+    }));
+
+    return NextResponse.json(filtered);
   } catch (error: any) {
     console.error("Erreur API Clubs:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
