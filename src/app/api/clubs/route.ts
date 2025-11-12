@@ -66,8 +66,8 @@ export async function GET() {
       throw new Error(`Erreur lors du fetch des items: ${itemsRes.statusText}`);
     }
 
-    const itemsData = await itemsRes.json();
-    const items: WebflowItem[] = itemsData.items ?? [];
+    const itemsData = (await itemsRes.json()) as { items: WebflowItem[] };
+    const items = itemsData.items ?? [];
 
     return NextResponse.json(items);
   } catch (error: any) {
