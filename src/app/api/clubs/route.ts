@@ -53,14 +53,16 @@ export async function GET() {
       return NextResponse.json({ error: "Collection 'Clubs' non trouvée" }, { status: 404 });
     }
 
-    // 3️⃣ Récupère tous les items (pagination)
+    // 3️⃣ Récupère tous les items avec pagination par offset
     let allItems: WebflowItem[] = [];
-    let nextCursor: string | null = null;
+    const limit = 100;
+    let offset = 0;
+    let total = 0;
 
     do {
       const url = new URL(`${WEBFLOW_API_URL}/collections/${clubsCollection.id}/items`);
-      url.searchParams.set("limit", "100");
-      if (nextCursor) url.searchParams.set("after", nextCursor);
+      url.searchParams.set("limit", limit.toString());
+      url.searchParams.set("offset", offset.toString());
 
       const itemsRes = await fetch(url.toString(), {
         headers: {
@@ -75,12 +77,13 @@ export async function GET() {
 
       const itemsData = (await itemsRes.json()) as {
         items: WebflowItem[];
-        pagination: { total: number; limit: number; next?: string | null };
+        pagination?: { total: number; limit: number; offset: number };
       };
 
       allItems = allItems.concat(itemsData.items ?? []);
-      nextCursor = itemsData.pagination?.next ?? null;
-    } while (nextCursor);
+      total = itemsData.pagination?.total ?? allItems.length;
+      offset += limit;
+    } while (offset < total);
 
     // 4️⃣ Filtre les champs utiles
     const filtered = allItems.map((item) => ({
@@ -103,4 +106,3 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-
