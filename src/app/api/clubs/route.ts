@@ -30,8 +30,8 @@ export async function GET() {
       throw new Error(`Erreur API Webflow: ${collectionsRes.statusText}`);
     }
 
-    const data = await collectionsRes.json();
-    const collections: WebflowCollection[] = data.collections ?? [];
+    const data = (await collectionsRes.json()) as { collections: WebflowCollection[] };
+    const collections = data.collections ?? [];
 
     if (!Array.isArray(collections) || collections.length === 0) {
       return NextResponse.json(
