@@ -17,6 +17,10 @@ interface WebflowItem {
     slug?: string;
     latitude?: string;
     longitude?: string;
+    city?: string;
+    image?: string | { url: string };
+    address?: string;
+    postal?: string;
     [key: string]: any;
   };
 }
@@ -49,28 +53,46 @@ export async function GET() {
       return NextResponse.json({ error: "Collection 'Clubs' non trouvée" }, { status: 404 });
     }
 
-    // 3️⃣ Récupère les items
-    const itemsRes = await fetch(
-      `${WEBFLOW_API_URL}/collections/${clubsCollection.id}/items`,
-      {
+    // 3️⃣ Récupère tous les items (pagination)
+    let allItems: WebflowItem[] = [];
+    let nextCursor: string | null = null;
+
+    do {
+      const url = new URL(`${WEBFLOW_API_URL}/collections/${clubsCollection.id}/items`);
+      url.searchParams.set("limit", "100");
+      if (nextCursor) url.searchParams.set("after", nextCursor);
+
+      const itemsRes = await fetch(url.toString(), {
         headers: {
           Authorization: `Bearer ${WEBFLOW_TOKEN}`,
           "Content-Type": "application/json",
         },
+      });
+
+      if (!itemsRes.ok) {
+        throw new Error(`Erreur lors du fetch des items: ${itemsRes.statusText}`);
       }
-    );
 
-    if (!itemsRes.ok) {
-      throw new Error(`Erreur lors du fetch des items: ${itemsRes.statusText}`);
-    }
+      const itemsData = (await itemsRes.json()) as {
+        items: WebflowItem[];
+        pagination: { total: number; limit: number; next?: string | null };
+      };
 
-    const itemsData = (await itemsRes.json()) as { items: WebflowItem[] };
-    const items = itemsData.items ?? [];
+      allItems = allItems.concat(itemsData.items ?? []);
+      nextCursor = itemsData.pagination?.next ?? null;
+    } while (nextCursor);
 
-    // 4️⃣ Ne garde que les champs utiles, depuis `fieldData`
-    const filtered = items.map((item) => ({
+    // 4️⃣ Filtre les champs utiles
+    const filtered = allItems.map((item) => ({
       name: item.fieldData?.name ?? null,
       slug: item.fieldData?.slug ?? null,
+      city: item.fieldData?.city ?? null,
+      address: item.fieldData?.address ?? null,
+      postal: item.fieldData?.postal ?? null,
+      image:
+        typeof item.fieldData?.image === "string"
+          ? item.fieldData.image
+          : item.fieldData?.image?.url ?? null,
       lat: parseFloat(item.fieldData?.latitude ?? "0"),
       lng: parseFloat(item.fieldData?.longitude ?? "0"),
     }));
@@ -81,3 +103,4 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
