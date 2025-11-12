@@ -18,7 +18,7 @@ interface WebflowItem {
 
 export async function GET() {
   try {
-    // 1️⃣ Récupère la liste des collections du site
+    // 1️⃣ Récupère les collections
     const collectionsRes = await fetch(`${WEBFLOW_API_URL}/sites/${WEBFLOW_SITE_ID}/collections`, {
       headers: {
         Authorization: `Bearer ${WEBFLOW_TOKEN}`,
@@ -26,32 +26,52 @@ export async function GET() {
       },
     });
 
-    const collections: WebflowCollection[] = await collectionsRes.json();
+    if (!collectionsRes.ok) {
+      throw new Error(`Erreur API Webflow: ${collectionsRes.statusText}`);
+    }
 
-    // 2️⃣ Trouve la collection "Clubs" (par son slug ou nom)
+    const data = await collectionsRes.json();
+    const collections: WebflowCollection[] = data.collections ?? [];
+
+    if (!Array.isArray(collections) || collections.length === 0) {
+      return NextResponse.json(
+        { error: "Aucune collection trouvée pour ce site Webflow" },
+        { status: 404 }
+      );
+    }
+
+    // 2️⃣ Trouve la collection "Clubs"
     const clubsCollection = collections.find(
-      (col: any) => col.displayName.toLowerCase() === "clubs" || col.slug === "clubs"
+      (col) =>
+        col.displayName.toLowerCase() === "clubs" ||
+        col.slug.toLowerCase() === "clubs"
     );
 
     if (!clubsCollection) {
       return NextResponse.json({ error: "Collection 'Clubs' non trouvée" }, { status: 404 });
     }
 
-    // 3️⃣ Récupère les items de cette collection
-    const itemsRes = await fetch(`${WEBFLOW_API_URL}/collections/${clubsCollection.id}/items`, {
-      headers: {
-        Authorization: `Bearer ${WEBFLOW_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-    });
+    // 3️⃣ Récupère les items
+    const itemsRes = await fetch(
+      `${WEBFLOW_API_URL}/collections/${clubsCollection.id}/items`,
+      {
+        headers: {
+          Authorization: `Bearer ${WEBFLOW_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    const { items }: { items: WebflowItem[] } = await itemsRes.json();
+    if (!itemsRes.ok) {
+      throw new Error(`Erreur lors du fetch des items: ${itemsRes.statusText}`);
+    }
 
-    // 4️⃣ Renvoie le JSON à Postman
+    const itemsData = await itemsRes.json();
+    const items: WebflowItem[] = itemsData.items ?? [];
+
     return NextResponse.json(items);
   } catch (error: any) {
-    console.error("Erreur API:", error);
+    console.error("Erreur API Clubs:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-
