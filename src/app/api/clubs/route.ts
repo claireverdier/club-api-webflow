@@ -89,13 +89,13 @@ export async function GET() {
     const filtered = allItems.map((item) => ({
       name: item.fieldData?.name ?? null,
       slug: item.fieldData?.slug ?? null,
-      city: item.fieldData?.city ?? null,
+      city: item.fieldData?.city-name ?? null,
       address: item.fieldData?.address ?? null,
-      postal: item.fieldData?.postal ?? null,
+      postal: item.fieldData?.postal-code ?? null,
       image:
-        typeof item.fieldData?.image === "string"
-          ? item.fieldData.image
-          : item.fieldData?.image?.url ?? null,
+        typeof item.fieldData?.cover === "string"
+          ? item.fieldData.cover
+          : item.fieldData?.cover?.url ?? null,
       lat: parseFloat(item.fieldData?.latitude ?? "0"),
       lng: parseFloat(item.fieldData?.longitude ?? "0"),
     }));
