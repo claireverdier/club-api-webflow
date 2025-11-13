@@ -89,9 +89,9 @@ export async function GET() {
     const filtered = allItems.map((item) => ({
       name: item.fieldData?.name ?? null,
       slug: item.fieldData?.slug ?? null,
-      city: item.fieldData?.city-name ?? null,
+      city: item.fieldData?.cityName ?? null,
       address: item.fieldData?.address ?? null,
-      postal: item.fieldData?.postal-code ?? null,
+      postal: item.fieldData?.postalCode ?? null,
       image:
         typeof item.fieldData?.cover === "string"
           ? item.fieldData.cover
