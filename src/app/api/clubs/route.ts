@@ -101,7 +101,7 @@ export async function GET() {
       name: item.fieldData?.name ?? null,
       slug: item.fieldData?.slug ?? null,
       cityId: item.fieldData?.city ?? null,
-      cityName: cityMap[item.fieldData?.city] ?? null,
+      city: cityMap[item.fieldData?.city] ?? null,
       address: item.fieldData?.address ?? null,
       postal: item.fieldData?.["postal-code"] ?? null,
       image:
