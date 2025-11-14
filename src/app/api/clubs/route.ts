@@ -153,26 +153,27 @@ async function fetchDataForSite(site: {
   }
 
   // 6️⃣ Fusion clubs + ville + brand + url
-  const filtered: ClubEntry[] = clubs.map((item) => ({
-    const slug = club.fieldData.slug;
-    const cityId: string | undefined = club.fieldData.city;
+  const filtered: ClubEntry[] = clubs.map((club) => {
+  // calcule les valeurs intermédiaires ici
+  const slug = club.fieldData?.slug ?? null;
+  const cityId = club.fieldData?.city ?? null;
 
-    return {
-      brand: site.brand,
-      name: club.fieldData?.name ?? null,
-      cityId,
-      city: cityId ? cityMap[cityId] ?? null : null,
-      address: club.fieldData?.address ?? null,
-      postal: club.fieldData?.["postal-code"] ?? null,
-      image:
-        typeof club.fieldData?.cover === "string"
-          ? club.fieldData.cover
-          : club.fieldData?.cover?.url ?? null,
-      lat: parseFloat(club.fieldData?.latitude ?? "0"),
-      lng: parseFloat(club.fieldData?.longitude ?? "0"),
-      url: slug ? `https://${site.domain}/clubs/${slug}` : null,
-    };
-  }));
+  return {
+    brand: site?.brand ?? null, 
+    name: club.fieldData?.name ?? null,
+    cityId,
+    city: cityId ? cityMap[cityId] ?? null : null,
+    address: club.fieldData?.address ?? null,
+    postal: club.fieldData?.["postal-code"] ?? null,
+    image:
+      typeof club.fieldData?.cover === "string"
+        ? club.fieldData.cover
+        : club.fieldData?.cover?.url ?? null,
+    lat: parseFloat(club.fieldData?.latitude ?? "0") || 0,
+    lng: parseFloat(club.fieldData?.longitude ?? "0") || 0,
+    url: slug ? `https://${site.domain}/clubs/${slug}` : null,
+  };
+});
 
   // 6️⃣ Tri alphabétique par nom de club
 filtered.sort((a, b) =>
