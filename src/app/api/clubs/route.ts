@@ -42,6 +42,18 @@ interface WebflowItem {
   };
 }
 
+interface ClubEntry {
+  name: string | null;
+  url: string | null;
+  cityId: string | null;
+  city: string | null;
+  address: string | null;
+  postal: string | null;
+  image: string | null;
+  lat: number;
+  lng: number;
+}
+
 /**
  * Récupération paginée de tous les items d'une collection
  */
@@ -141,7 +153,7 @@ async function fetchDataForSite(site: {
   }
 
   // 6️⃣ Fusion clubs + ville + brand + url
-  return clubs.map((club) => {
+  const filtered: ClubEntry[] = clubs.map((item) => ({
     const slug = club.fieldData.slug;
     const cityId: string | undefined = club.fieldData.city;
 
@@ -149,7 +161,7 @@ async function fetchDataForSite(site: {
       brand: site.brand,
       name: club.fieldData?.name ?? null,
       cityId,
-      cityName: cityId ? cityMap[cityId] ?? null : null,
+      city: cityId ? cityMap[cityId] ?? null : null,
       address: club.fieldData?.address ?? null,
       postal: club.fieldData?.["postal-code"] ?? null,
       image:
@@ -160,7 +172,14 @@ async function fetchDataForSite(site: {
       lng: parseFloat(club.fieldData?.longitude ?? "0"),
       url: slug ? `https://${site.domain}/clubs/${slug}` : null,
     };
-  });
+  }));
+
+  // 6️⃣ Tri alphabétique par nom de club
+filtered.sort((a, b) =>
+  (a.name ?? "").localeCompare(b.name ?? "", "fr", { sensitivity: "base" })
+);
+
+return NextResponse.json(filtered);
 }
 
 /**
