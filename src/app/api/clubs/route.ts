@@ -149,7 +149,7 @@ async function fetchDataForSite(site: {
       brand: site.brand,
       name: club.fieldData?.name ?? null,
       cityId,
-      cityName: cityId ? cityMap[cityId] ?? null : null;
+      cityName: cityId ? cityMap[cityId] ?? null : null,
       address: club.fieldData?.address ?? null,
       postal: club.fieldData?.["postal-code"] ?? null,
       image:
