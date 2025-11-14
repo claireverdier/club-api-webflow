@@ -153,7 +153,7 @@ async function fetchDataForSite(site: {
   }
 
   // 6️⃣ Fusion clubs + ville + brand + url
-  const filtered: ClubEntry[] = clubs.map((club) => {
+  return clubs.map((club) => {
   // calcule les valeurs intermédiaires ici
   const slug = club.fieldData?.slug ?? null;
   const cityId = club.fieldData?.city ?? null;
@@ -171,21 +171,9 @@ async function fetchDataForSite(site: {
         : club.fieldData?.cover?.url ?? null,
     lat: parseFloat(club.fieldData?.latitude ?? "0") || 0,
     lng: parseFloat(club.fieldData?.longitude ?? "0") || 0,
-    url: slug ? `https://${site.domain}/clubs/${slug}` : null,
+    url: slug ? `https://${site.domain}/s/${slug}` : null,
   };
 });
-
-  // 6️⃣ Tri alphabétique par nom de club
-filtered.sort((a, b) => {
-  const nameA = a.name ?? "";
-  const nameB = b.name ?? "";
-  if (!nameA && !nameB) return 0;
-  if (!nameA) return 1;
-  if (!nameB) return -1;
-  return nameA.localeCompare(nameB, "fr", { sensitivity: "base" });
-});
-
-return NextResponse.json(filtered);
 }
 
 /**
@@ -193,12 +181,22 @@ return NextResponse.json(filtered);
  */
 export async function GET() {
   try {
-    let allClubs: any[] = [];
+    let allClubs: ClubEntry[] = [];
 
     for (const site of SITES) {
       const clubs = await fetchDataForSite(site);
       allClubs = allClubs.concat(clubs);
     }
+
+    // Tri global par nom de club
+    allClubs.sort((a, b) => {
+      const nameA = a.name ?? "";
+      const nameB = b.name ?? "";
+      if (!nameA && !nameB) return 0;
+      if (!nameA) return 1;
+      if (!nameB) return -1;
+      return nameA.localeCompare(nameB, "fr", { sensitivity: "base" });
+    });
 
     return NextResponse.json(allClubs);
   } catch (error: any) {
