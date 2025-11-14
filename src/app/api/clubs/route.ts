@@ -142,7 +142,7 @@ async function fetchDataForSite(site: {
 
   // 6️⃣ Fusion clubs + ville + brand + url
   return clubs.map((club) => {
-    const slug: string = club.fieldData.slug;
+    const slug = club.fieldData.slug;
     const cityId: string | null = club.fieldData.city;
 
     return {
