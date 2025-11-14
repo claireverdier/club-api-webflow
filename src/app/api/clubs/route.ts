@@ -176,9 +176,14 @@ async function fetchDataForSite(site: {
 });
 
   // 6️⃣ Tri alphabétique par nom de club
-filtered.sort((a, b) =>
-  (a.name ?? "").localeCompare(b.name ?? "", "fr", { sensitivity: "base" })
-);
+filtered.sort((a, b) => {
+  const nameA = a.name ?? "";
+  const nameB = b.name ?? "";
+  if (!nameA && !nameB) return 0;
+  if (!nameA) return 1;
+  if (!nameB) return -1;
+  return nameA.localeCompare(nameB, "fr", { sensitivity: "base" });
+});
 
 return NextResponse.json(filtered);
 }
